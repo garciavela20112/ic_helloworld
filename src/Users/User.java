@@ -1,7 +1,5 @@
 package Users;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class User {
@@ -36,5 +34,7 @@ public class User {
     this.interests = interests;
     id++;
   }
+
+    MongoClient test = new MongoClient();
 
 }
