@@ -1,9 +1,10 @@
 package Users;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import DB.MongoConnection;
 import com.mongodb.client.MongoCollection;
@@ -23,7 +24,8 @@ public class User {
   private String profilePic;
 
   public User(String firstName, String lastName, String userName, String password,
-              Date dateOfBirth, String profilePic, List<Interests> interests) {
+              Date dateOfBirth, File profilePic, List<Interests> interests)
+      throws IOException {
     this.firstName = firstName;
     this.lastName = lastName;
     this.userName = userName;
@@ -31,7 +33,25 @@ public class User {
     this.dateOfBirth = dateOfBirth;
     this.interests = interests;
     this.friends = new ArrayList<>();
-    this.profilePic = profilePic;
+    File targetFile = new File("profilepictures/" + userName + ".jpg");
+    FileInputStream input = new FileInputStream(profilePic);
+    FileOutputStream output = new FileOutputStream(targetFile);
+    copyStream(input, output, 10000);
+    output.flush();
+    output.close();
+    input.close();
+    this.profilePic = targetFile.getPath();
+  }
+
+  public static void copyStream(final InputStream inputStream,
+                                final OutputStream outputStream, final int bufferLength)
+      throws IOException {
+    // copy the input stream to the output stream
+    byte[] buf = new byte[bufferLength];
+    int len;
+    while ((len = inputStream.read(buf)) > 0) {
+      outputStream.write(buf, 0, len);
+    }
   }
 
   public void addUser(MongoCollection<Document> usersCollection) {
@@ -39,9 +59,9 @@ public class User {
         .append("last_name", lastName)
         .append("user_name", userName)
         .append("password", password)
-        .append("dob", dateOfBirth)
-        .append("interests", interests)
-        .append("friends", friends)
+        .append("dob", dateOfBirth.toString())
+        .append("interests", interests.stream().map(Enum::toString).collect(Collectors.toList()))
+        .append("friends", friends.stream().map(friend -> friend.userName).collect(Collectors.toList()))
         .append("profile_pic", profilePic);
     usersCollection.insertOne(doc);
   }
@@ -51,23 +71,24 @@ public class User {
         .append("last_name", lastName)
         .append("user_name", userName)
         .append("password", password)
-        .append("dob", dateOfBirth)
-        .append("interests", interests)
-        .append("friends", friends)
+        .append("dob", dateOfBirth.toString())
+        .append("interests", interests.stream().map(Enum::toString).collect(Collectors.toList()))
+        .append("friends", friends.stream().map(friend -> friend.userName).collect(Collectors.toList()))
         .append("profile_pic", profilePic);
-    usersCollection.insertOne(doc);
     usersCollection.findOneAndReplace(Filters.eq("user_name", userName), doc);
   }
 
   public void addFriend(User friend, MongoCollection<Document> usersCollection) {
     friends.add(friend);
     UpdateDB(usersCollection);
+    friend.addFriend(this, usersCollection);
   }
   //Pre: friend is in list of friends.
 
   public void removeFriend(User friend, MongoCollection<Document> usersCollection) {
     friends.remove(friend);
     UpdateDB(usersCollection);
+    friend.removeFriend(this, usersCollection);
   }
 
   public void changeUsername(String newUsername, MongoCollection<Document> usersCollection) {
@@ -91,5 +112,17 @@ public class User {
                              MongoCollection<Document> usersCollection) {
     this.interests = newInterests;
     UpdateDB(usersCollection);
+  }
+
+
+  public static void main(String[] args) throws IOException, ParseException {
+    MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
+    User test = new User("Norberto", "Mateos", "norbertomat", "1234", new Date(2002,07,06),
+        new File("profilepictures/Photo.jpg"), List.of(Interests.CODING, Interests.SPORTS));
+    test.addUser(users);
+    User test1 = new User("Oscar", "Garcia", "oscargarcia", "14534", new Date(2002,8,03),
+        new File("profilepictures/Photo.jpg"), List.of(Interests.CODING, Interests.SPORTS));
+    test1.addUser(users);
+    test.addFriend(test1, users);
   }
 }
