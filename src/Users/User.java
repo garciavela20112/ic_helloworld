@@ -1,6 +1,7 @@
 package Users;
 
 import java.util.List;
+import com.mongodb.MongoClient;
 
 public class User {
 
