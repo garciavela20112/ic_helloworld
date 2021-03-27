@@ -37,5 +37,4 @@ public class User {
     this.interests = interests;
     id++;
   }
-
 }

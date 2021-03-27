@@ -1,7 +1,13 @@
 package Servlet;
 
+import DBConnection.MongoConnection;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import org.bson.Document;
+import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,33 +15,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
 
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
 
-    // read form fields
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
+    try {
+      MongoCollection<Document> collection = MongoConnection.DBConnect().getCollection("users");
 
-    System.out.println("username: " + username);
-    System.out.println("password: " + password);
+      String username = request.getParameter("username");
+      String password = request.getParameter("password");
 
-    // do some processing here...
+      FindIterable<Document> itr = collection.find(Filters.and(
+          Filters.eq("username",username),
+          Filters.eq("password", password)
+      ));
 
-    // get response writer
-    PrintWriter writer = response.getWriter();
+      Boolean isUser = false;
+      itr.forEach(true);
 
-    // build HTML code
-    String htmlRespone = "<html>";
-    htmlRespone += "<h2>Your username is: " + username + "<br/>";
-    htmlRespone += "Your password is: " + password + "</h2>";
-    htmlRespone += "</html>";
-
-    // return response
-    writer.println(htmlRespone);
-
+      //SC_ACCEPTED = 202
+      //SC_NOT_ACCEPTABLE = 406
+      response.setStatus(1);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
   }
 
 }
