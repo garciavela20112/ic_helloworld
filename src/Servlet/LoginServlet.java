@@ -33,8 +33,10 @@ public class LoginServlet extends HttpServlet {
           Filters.eq("password", password)
       ));
 
-      Boolean isUser = false;
-      itr.forEach(true);
+      if (itr.iterator().hasNext()) {
+        //Username and Password Match
+        response.
+      }
 
       //SC_ACCEPTED = 202
       //SC_NOT_ACCEPTABLE = 406
