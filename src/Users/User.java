@@ -15,6 +15,8 @@ public class User {
   private final Date dateOfBirth;
   private final List<Interests> interests;
 
+  MongoClient test = new MongoClient();
+
   public User(String firstName, String lastName, String userName, Date dateOfBirth,
               List<Interests> interests) {
     this.firstName = firstName;
@@ -35,7 +37,5 @@ public class User {
     this.interests = interests;
     id++;
   }
-
-    MongoClient test = new MongoClient();
 
 }
