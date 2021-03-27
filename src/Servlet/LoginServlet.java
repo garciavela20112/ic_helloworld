@@ -1,6 +1,6 @@
 package Servlet;
 
-import DBConnection.MongoConnection;
+import DB.MongoConnection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -27,6 +27,12 @@ public class LoginServlet extends HttpServlet {
 
       String username = request.getParameter("username");
       String password = request.getParameter("password");
+      Boolean newAccount = Boolean.valueOf(request.getParameter("newAccount"));
+
+      if (newAccount) {
+        //Set Register Flag
+        collection.find(Filters.eq("username", ))
+      }
 
       FindIterable<Document> itr = collection.find(Filters.and(
           Filters.eq("username",username),
@@ -35,8 +41,8 @@ public class LoginServlet extends HttpServlet {
 
       if (itr.iterator().hasNext()) {
         //Username and Password Match
-        response.
       }
+
 
       //SC_ACCEPTED = 202
       //SC_NOT_ACCEPTABLE = 406

@@ -1,4 +1,4 @@
-package DBConnection;
+package DB;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -23,7 +23,7 @@ public class MongoConnection {
 
 
     MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://" + username + ":"  + password +
-        "@cluster0.1rt3i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority)"));
+        "@cluster0.1rt3i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"));
     return mongoClient.getDatabase(dbname);
   }
 
