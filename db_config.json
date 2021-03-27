@@ -1,8 +1,7 @@
 {
   "db-name": "elgemo",
   "user-collection-name": "Users",
-  "authentication" : {
-    "username": "root",
-    "password": "ichelloworld"
-  }
+  "username": "root",
+  "password": "ichelloworld"
+
 }
