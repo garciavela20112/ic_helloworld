@@ -41,6 +41,8 @@ public class LoginServlet extends HttpServlet {
         } else {
           response.addHeader("success", "false");
         }
+      } else {
+        response.addHeader("success", "false");
       }
 
     } catch (ParseException e) {
