@@ -36,8 +36,8 @@ public class LoginServlet extends HttpServlet {
 
       if (itr.iterator().hasNext()) {
         MongoUser user = new MongoUser(username);
-        boolean success = user.checkCredentials(password);
-        response.addHeader("success");
+        Boolean success = user.checkCredentials(password);
+        response.addHeader("success", user.checkCredentials(password).toString());
       }
 
 

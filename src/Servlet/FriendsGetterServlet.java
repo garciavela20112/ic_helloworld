@@ -21,7 +21,7 @@ public class FriendsGetterServlet extends HttpServlet {
   public FriendsGetterServlet() {
   }
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     try {
       MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
       String username = request.getParameter("user");
