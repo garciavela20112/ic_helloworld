@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .left {
+        left: 0;
+        background-color: #111;
+        color: white;
+        width: 50%;
+
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 50%;
+        padding: 50px;
+        height: 100%;
+        /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        height: 200%;
+    }
+
+    .block {
+        position: relative;
+        left: 50%;
+        height: 50%;
+        width: 100%;
+        border: none;
+        right: 10%;
+        bottom: 10%;
+        background-color: #4CAF50;
+        padding: 14px 28px;
+        font-size: 30px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+
+    }
+</style>
+
+<head>
+    <title>Main Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h2>Main Page</h2>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <h3>Friends</h3>
+            <ul>
+                <li><a href="/friend1">Friend 1</a></li>
+                <li><a href="/friend2">Friend 2</a></li>
+                <li><a href="/friend3">Friend 3</a></li>
+            </ul>
+
+        </div>
+
+        <div class="column">
+            <div class="col-sm-5">
+                <a href="Login.html">
+                    <input type="button" value="Random" class="block" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
