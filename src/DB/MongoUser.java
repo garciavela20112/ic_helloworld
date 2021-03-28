@@ -1,8 +1,5 @@
 package DB;
 
-import Users.Date;
-import Users.Interests;
-import Users.User;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -11,7 +8,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MongoUser {
 
