@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .left {
+        left: 0;
+        background-color: #111;
+        color: white;
+        width: 50%;
+
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 25%;
+        padding: 10px;
+        height: 300px;
+        text-align: center;
+        padding-top: 30pt;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        color:black;
+    }
+
+    .block {
+        position: relative;
+        left: 50%;
+        height: 50%;
+        width: 100%;
+        border: none;
+        right: 10%;
+        bottom: 10%;
+        background-color: #4CAF50;
+        padding: 14px 28px;
+        font-size: 30px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(50, 47, 255);
+        color: white;
+        text-align: center;
+    }
+
+    .id {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding-top: 20pt;
+        padding-bottom: 20pt;
+        background-color: rgb(255, 47, 47);
+        color: white;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    picture {
+        width: 10px;
+    }
+</style>
+
+<head>
+    <title>Main Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <h2>Main Page</h2>
+    </div>
+
+    <div class="id">
+        <picture> <img src="blank-profile-picture-973460_640.png" alt="" style="max-width: 100px;"/></picture>
+        <br> <br>
+        <p>me</p>]
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <a href="text.html">
+            <picture> <img src="blank-profile-picture-973460_640.png" alt="" style="max-width: 100px;"/></picture>
+            <br> <br>
+            <p href="hi">John Doe</p>
+        </a>
+
+        </div>
+        <div class="column">
+            <picture> <img src="blank-profile-picture-973460_640.png" alt="" style="max-width: 100px;"/></picture>
+            <br> <br>
+            <p href="hi">Imperial Computing</p>
+
+        </div>
+        <!-- <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div> -->
+    </div>
+    
+
+
+    <a href="findrandom">
+        <div class="footer">
+            <p>Random</p>
+
+        </div>
+    </a>
+
+
+</body>
+
+</html>
