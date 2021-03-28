@@ -1,24 +1,23 @@
 package Servlet;
 
-import DB.MongoConnection;
 import DB.MongoUser;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
 import org.json.simple.parser.ParseException;
 
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class FriendAdderServlet {
+@WebServlet("/friendsAdderServlet")
+public class FriendAdderServlet extends HttpServlet {
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     try {
-      MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
       String username = request.getParameter("user");
+      String friendUsername = request.getParameter("friend");
       MongoUser user = new MongoUser(username);
-      String friends = user.getFriends();
-      response.addHeader("friendsList", friends);
+      user.addFriend(friendUsername);
     } catch (ParseException e) {
       e.printStackTrace();
     }

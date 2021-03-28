@@ -111,18 +111,18 @@ public class MongoUser {
   public String getProfile() {
     StringBuilder interestString = new StringBuilder();
     for (String interest : interests) {
-      interestString.append(interest).append(",");
+      interestString.append(interest).append("|");
     }
     interestString.deleteCharAt(interestString.length() - 1);
 
-    return userName + "," + profilePic + "," + firstName + "," + lastName + "," +
-        dateOfBirth + "," + interestString.toString();
+    return userName + "|" + profilePic + "|" + firstName + "|" + lastName + "|" +
+        dateOfBirth + "|" + interestString.toString();
   }
 
   public String getFriends() {
     StringBuilder friendString = new StringBuilder();
     for (String friend : friends) {
-      friendString.append(friend).append(",");
+      friendString.append(friend).append("|");
     }
     friendString.deleteCharAt(friendString.length() - 1);
     return friendString.toString();
