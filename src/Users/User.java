@@ -21,7 +21,18 @@ public class User {
   private final List<User> friends;
   private final Date dateOfBirth;
   private List<Interests> interests;
-  private String profilePic;
+  private String profilePic = "profilepictures/default.jpg";
+
+  public User(String firstName, String lastName, String userName, String password,
+              Date dateOfBirth, List<Interests> interests) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.userName = userName;
+    this.password = password;
+    this.dateOfBirth = dateOfBirth;
+    this.interests = interests;
+    this.friends = new ArrayList<>();
+  }
 
   public User(String firstName, String lastName, String userName, String password,
               Date dateOfBirth, File profilePic, List<Interests> interests)
@@ -43,17 +54,6 @@ public class User {
     this.profilePic = targetFile.getPath();
   }
 
-  public static void copyStream(final InputStream inputStream,
-                                final OutputStream outputStream, final int bufferLength)
-      throws IOException {
-    // copy the input stream to the output stream
-    byte[] buf = new byte[bufferLength];
-    int len;
-    while ((len = inputStream.read(buf)) > 0) {
-      outputStream.write(buf, 0, len);
-    }
-  }
-
   public void addUser(MongoCollection<Document> usersCollection) {
     Document doc = new Document("first_name", firstName)
         .append("last_name", lastName)
@@ -64,6 +64,17 @@ public class User {
         .append("friends", friends.stream().map(friend -> friend.userName).collect(Collectors.toList()))
         .append("profile_pic", profilePic);
     usersCollection.insertOne(doc);
+  }
+
+  public static void copyStream(final InputStream inputStream,
+                                final OutputStream outputStream, final int bufferLength)
+      throws IOException {
+    // copy the input stream to the output stream
+    byte[] buf = new byte[bufferLength];
+    int len;
+    while ((len = inputStream.read(buf)) > 0) {
+      outputStream.write(buf, 0, len);
+    }
   }
 
   private void UpdateDB(MongoCollection<Document> usersCollection) {
@@ -101,10 +112,17 @@ public class User {
     UpdateDB(usersCollection);
   }
 
-  public void changeProfilePic(String newProfilePic, MongoCollection<Document> usersCollection) {
-    this.profilePic = newProfilePic;
-    File file = new File(profilePic);
-    file.delete();
+  public void changeProfilePic(String newProfilePic, MongoCollection<Document> usersCollection) throws IOException {
+    File oldPic = new File("profilepictures/" + userName + ".jpg");
+    oldPic.delete();
+    File targetFile = new File("profilepictures/" + userName + ".jpg");
+    FileInputStream input = new FileInputStream(newProfilePic);
+    FileOutputStream output = new FileOutputStream(targetFile);
+    copyStream(input, output, 10000);
+    output.flush();
+    output.close();
+    input.close();
+    this.profilePic = targetFile.getPath();
     UpdateDB(usersCollection);
   }
 

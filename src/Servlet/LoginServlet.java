@@ -23,13 +23,13 @@ public class LoginServlet extends HttpServlet {
                         HttpServletResponse response) throws ServletException, IOException {
 
     try {
-      MongoCollection<Document> collection = MongoConnection.DBConnect().getCollection("users");
+      MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
 
       String username = request.getParameter("username");
       String password = request.getParameter("password");
 
-      FindIterable<Document> itr = collection.find(Filters.and(
-          Filters.eq("username",username),
+      FindIterable<Document> itr = users.find(Filters.and(
+          Filters.eq("user_name", username),
           Filters.eq("password", password)
       ));
 
