@@ -21,7 +21,7 @@ public class ProfileGetterServlet extends HttpServlet {
     try {
       String username = request.getParameter("username");
       MongoUser user = new MongoUser(username);
-      response.addHeader("friendsList", user.getProfile());
+      response.addHeader("profile", user.getProfile());
     } catch (ParseException e) {
       e.printStackTrace();
     }
