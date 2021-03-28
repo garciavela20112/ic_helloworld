@@ -1,8 +1,12 @@
 package Messages;
 
+import java.io.IOException;
 import java.util.Date;
+
+import DB.MongoConnection;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.json.simple.parser.ParseException;
 
 public class Message {
 
@@ -26,7 +30,7 @@ public class Message {
       messageCollection.insertOne(doc);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException, ParseException {
       Message msg = new Message("oscargarcia", "norbertomat", "Hey, how you been? You going to the Hackathon?");
       msg.addMessage(MongoConnection.DBConnect().getCollection("messages"));
   }
