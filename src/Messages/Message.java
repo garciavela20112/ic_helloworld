@@ -31,7 +31,18 @@ public class Message {
   }
 
   public static void main(String[] args) throws IOException, ParseException {
-      Message msg = new Message("oscargarcia", "norbertomat", "Hey, how you been? You going to the Hackathon?");
+      Message msg = new Message("norbertomat", "oscargarcia", "Good, good, you? Is that even a question??? Ofcourse I am!");
       msg.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+      Message msg2 = new Message("oscargarcia", "norbertomat", "Awesoome. I'll see you there :)");
+      msg2.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+      Message msg3 = new Message("norbertomat","oscargarcia","See you there buddy");
+      msg3.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+      Message msg4 = new Message("billyg", "musky","Yo, can you swing me 3 long. Feeling like buying a private island today XD");
+      msg4.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+      Message msg5 = new Message("musky","billyg","Ok, Bill, but last time. I'm tired of this");
+      msg5.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+      Message msg6 = new Message("billyg","musky","Understood, cheers.");
+      msg6.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+
   }
 }
