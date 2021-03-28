@@ -28,7 +28,6 @@ public class FriendsGetterServlet extends HttpServlet {
       MongoUser user = new MongoUser(username);
       String friends = user.getFriends();
       response.addHeader("friendsList", friends);
-      response.getHeader("friendsList");
     } catch (ParseException e) {
       e.printStackTrace();
     }

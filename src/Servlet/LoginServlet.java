@@ -36,14 +36,13 @@ public class LoginServlet extends HttpServlet {
 
       if (itr.iterator().hasNext()) {
         MongoUser user = new MongoUser(username);
-        Boolean success = user.checkCredentials(password);
-        response.addHeader("success", user.checkCredentials(password).toString());
+        if (user.checkCredentials(password)) {
+          response.addHeader("success", "true");
+        } else {
+          response.addHeader("success", "false");
+        }
       }
 
-
-      //SC_ACCEPTED = 202
-      //SC_NOT_ACCEPTABLE = 406
-      response.setStatus(1);
     } catch (ParseException e) {
       e.printStackTrace();
     }
