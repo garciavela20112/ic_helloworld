@@ -114,6 +114,30 @@ public class User {
     UpdateDB(usersCollection);
   }
 
+  public String getProfile() {
+    StringBuilder interestString = new StringBuilder();
+    List<String> interestsList = interests.stream().map(Enum::toString)
+        .collect(Collectors.toList());
+    for (String interest : interestsList) {
+      interestString.append(interest).append(",");
+    }
+    interestString.deleteCharAt(interestString.length() - 1);
+
+    return userName + "," + profilePic + "," + firstName + "," + lastName + "," +
+        dateOfBirth.toString() + "," +
+        interestString.toString();
+  }
+
+  public String getFriends() {
+    StringBuilder friendString = new StringBuilder();
+    List<String> friendsList = friends.stream().map(friend -> friend.userName)
+        .collect(Collectors.toList());
+    for (String friend : friendsList) {
+      friendString.append(friend).append(",");
+    }
+    friendString.deleteCharAt(friendString.length() - 1);
+    return friendString.toString();
+  }
 
   public static void main(String[] args) throws IOException, ParseException {
     MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
