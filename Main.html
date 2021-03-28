@@ -12,18 +12,20 @@
     /* Create two equal columns that floats next to each other */
     .column {
         float: left;
-        width: 50%;
-        padding: 50px;
-        height: 100%;
-        /* Should be removed. Only for demonstration */
+        width: 25%;
+        padding: 10px;
+        height: 300px;
+        text-align: center;
+        padding-top: 30pt;
     }
 
     /* Clear floats after the columns */
     .row:after {
+        
         content: "";
         display: table;
         clear: both;
-        height: 200%;
+        color:black;
     }
 
     .block {
@@ -42,6 +44,37 @@
         color: white;
 
     }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(50, 47, 255);
+        color: white;
+        text-align: center;
+    }
+
+    .id {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding-top: 20pt;
+        padding-bottom: 20pt;
+        background-color: rgb(255, 47, 47);
+        color: white;
+        text-align: center;
+        font-size: 20px;
+    }
 </style>
 
 <head>
@@ -55,29 +88,52 @@
 
 <body>
 
-    <div class="jumbotron text-center">
+    <div class="header">
         <h2>Main Page</h2>
+    </div>
+
+    <div class="id">
+        <p>me</p>
     </div>
 
     <div class="row">
         <div class="column">
-            <h3>Friends</h3>
-            <ul>
-                <li><a href="/friend1">Friend 1</a></li>
-                <li><a href="/friend2">Friend 2</a></li>
-                <li><a href="/friend3">Friend 3</a></li>
-            </ul>
-
+            <p href="hi">friend1</p>
+        </div>
+        <div class="column">
+            <p href="hi">friend1</p>
         </div>
 
         <div class="column">
-            <div class="col-sm-5">
-                <a href="Login.html">
-                    <input type="button" value="Random" class="block" />
-                </a>
-            </div>
+            <p href="hi">friend1</p>
+        </div>
+        <div class="column">
+            <p href="hi">friend1</p>
         </div>
     </div>
+    <div class="row">
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+        <div class="column">
+            <p href="hi">friend1</p>
+        </div>
+    </div>
+
+
+    <a href="findrandom">
+        <div class="footer">
+            <p>Random</p>
+
+        </div>
+    </a>
 
 
 </body>
