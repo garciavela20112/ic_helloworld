@@ -1,6 +1,7 @@
 package Servlet;
 
 import DB.MongoConnection;
+import DB.MongoUser;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -24,9 +25,10 @@ public class FriendsGetterServlet extends HttpServlet {
     try {
       MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
       String username = request.getParameter("user");
-      FindIterable<Document> itr = users.find(Filters.eq("user_name", username));
-      List<String> friendsList = itr.iterator().next().get("friends");
-
+      MongoUser user = new MongoUser(username);
+      String friends = user.getFriends();
+      response.addHeader("friendsList", friends);
+      response.getHeader("friendsList");
     } catch (ParseException e) {
       e.printStackTrace();
     }

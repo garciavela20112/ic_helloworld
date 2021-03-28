@@ -62,31 +62,34 @@ public class MongoUser {
     users.findOneAndReplace(Filters.eq("user_name", userName), doc);
   }
 
-  public void addFriend(String friendUserName) {
+  public void addFriend(String friendUserName) throws IOException, ParseException {
     friends.add(friendUserName);
     UpdateDB();
-
-    friend.addFriend(this, usersCollection);
+    MongoUser friend = new MongoUser(friendUserName);
+    friend.addFriend(this.userName);
+    friend.UpdateDB();
   }
+
   //Pre: friend is in list of friends.
-
-  public void removeFriend(User friend, MongoCollection<Document> usersCollection) {
-    friends.remove(friend);
-    UpdateDB(usersCollection);
-    friend.removeFriend(this, usersCollection);
+  public void removeFriend(String friendUserName) throws IOException, ParseException {
+    friends.remove(friendUserName);
+    UpdateDB();
+    MongoUser friend = new MongoUser(friendUserName);
+    friend.removeFriend(this.userName);
+    friend.UpdateDB();
   }
 
-  public void changeUsername(String newUsername, MongoCollection<Document> usersCollection) {
+  public void changeUsername(String newUsername) {
     this.userName = newUsername;
-    UpdateDB(usersCollection);
+    UpdateDB();
   }
 
-  public void changePassword(String newPassword, MongoCollection<Document> usersCollection) {
+  public void changePassword(String newPassword) {
     this.password = newPassword;
-    UpdateDB(usersCollection);
+    UpdateDB();
   }
 
-  public void changeProfilePic(String newProfilePic, MongoCollection<Document> usersCollection) throws IOException {
+  public void changeProfilePic(String newProfilePic) throws IOException {
     File oldPic = new File("profilepictures/" + userName + ".jpg");
     oldPic.delete();
     File targetFile = new File("profilepictures/" + userName + ".jpg");
@@ -97,31 +100,36 @@ public class MongoUser {
     output.close();
     input.close();
     this.profilePic = targetFile.getPath();
-    UpdateDB(usersCollection);
+    UpdateDB();
   }
 
-  public void updateInterest(List<Interests> newInterests,
-                             MongoCollection<Document> usersCollection) {
+  public void updateInterest(List<String> newInterests) {
     this.interests = newInterests;
-    UpdateDB(usersCollection);
+    UpdateDB();
   }
 
   public String getProfile() {
     StringBuilder interestString = new StringBuilder();
-    List<String> interestsList = interests.stream().map(Enum::toString)
-        .collect(Collectors.toList());
-    for (String interest : interestsList) {
+    for (String interest : interests) {
       interestString.append(interest).append(",");
     }
     interestString.deleteCharAt(interestString.length() - 1);
 
     return userName + "," + profilePic + "," + firstName + "," + lastName + "," +
-        dateOfBirth.toString() + "," +
-        interestString.toString();
+        dateOfBirth + "," + interestString.toString();
   }
 
-  public List<User> getFriends() {
-    return friends;
+  public String getFriends() {
+    StringBuilder friendString = new StringBuilder();
+    for (String friend : friends) {
+      friendString.append(friend).append(",");
+    }
+    friendString.deleteCharAt(friendString.length() - 1);
+    return friendString.toString();
   }
 
+  public boolean checkCredentials(String passwordTry) {
+    return this.password.equals(passwordTry);
+
+  }
 }

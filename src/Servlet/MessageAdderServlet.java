@@ -1,15 +1,25 @@
 package Servlet;
 
 
-import java.io.IOException; 
+import DB.MongoConnection;
+import Messages.Message;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/messageAdderSevlet")
+@WebServlet("/messageAdderServlet")
 public class MessageAdderServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+                          HttpServletResponse response) throws ServletException, IOException {
         try {
             MongoCollection<Document> messages = MongoConnection.DBConnect().getCollection("messages");
 

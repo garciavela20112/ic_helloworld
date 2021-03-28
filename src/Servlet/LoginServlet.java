@@ -1,6 +1,7 @@
 package Servlet;
 
 import DB.MongoConnection;
+import DB.MongoUser;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -34,7 +35,9 @@ public class LoginServlet extends HttpServlet {
       ));
 
       if (itr.iterator().hasNext()) {
-        //Username and Password Match
+        MongoUser user = new MongoUser(username);
+        boolean success = user.checkCredentials(password);
+        response.addHeader("success");
       }
 
 
