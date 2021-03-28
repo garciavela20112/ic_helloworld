@@ -29,10 +29,7 @@ public class LoginServlet extends HttpServlet {
       String username = request.getParameter("username");
       String password = request.getParameter("password");
 
-      FindIterable<Document> itr = users.find(Filters.and(
-          Filters.eq("user_name", username),
-          Filters.eq("password", password)
-      ));
+      FindIterable<Document> itr = users.find(Filters.eq("user_name", username));
 
       if (itr.iterator().hasNext()) {
         MongoUser user = new MongoUser(username);

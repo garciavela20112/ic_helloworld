@@ -79,17 +79,12 @@ public class MongoUser {
     friend.UpdateDB();
   }
 
-  public void changeUsername(String newUsername) {
-    this.userName = newUsername;
-    UpdateDB();
-  }
-
   public void changePassword(String newPassword) {
     this.password = newPassword;
     UpdateDB();
   }
 
-  public void changeProfilePic(String newProfilePic) throws IOException {
+  public void changeProfilePic(File newProfilePic) throws IOException {
     File oldPic = new File("profilepictures/" + userName + ".jpg");
     oldPic.delete();
     File targetFile = new File("profilepictures/" + userName + ".jpg");

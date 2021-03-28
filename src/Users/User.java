@@ -3,7 +3,6 @@ package Users;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import DB.MongoConnection;
@@ -112,7 +111,7 @@ public class User {
     UpdateDB(usersCollection);
   }
 
-  public void changeProfilePic(String newProfilePic, MongoCollection<Document> usersCollection) throws IOException {
+  public void changeProfilePic(File newProfilePic, MongoCollection<Document> usersCollection) throws IOException {
     File oldPic = new File("profilepictures/" + userName + ".jpg");
     oldPic.delete();
     File targetFile = new File("profilepictures/" + userName + ".jpg");
