@@ -149,14 +149,4 @@ public class User {
     return friends;
   }
 
-  public static void main(String[] args) throws IOException, ParseException {
-    MongoCollection<Document> users = MongoConnection.DBConnect().getCollection("users");
-    User test = new User("Norberto", "Mateos", "norbertomat", "1234", new Date(2002,07,06),
-        new File("profilepictures/Photo.jpg"), List.of(Interests.CODING, Interests.SPORTS));
-    test.addUser(users);
-    User test1 = new User("Oscar", "Garcia", "oscargarcia", "14534", new Date(2002,8,03),
-        new File("profilepictures/Photo.jpg"), List.of(Interests.CODING, Interests.SPORTS));
-    test1.addUser(users);
-    test.addFriend(test1, users);
-  }
 }

@@ -59,11 +59,14 @@ public class MongoUser {
   }
 
   public void addFriend(String friendUserName) throws IOException, ParseException {
-    friends.add(friendUserName);
     UpdateDB();
-    MongoUser friend = new MongoUser(friendUserName);
-    friend.addFriend(this.userName);
-    friend.UpdateDB();
+    if (!(friends.contains(friendUserName))) {
+      friends.add(friendUserName);
+      UpdateDB();
+      MongoUser friend = new MongoUser(friendUserName);
+      friend.addFriend(this.userName);
+      friend.UpdateDB();
+    }
   }
 
   //Pre: friend is in list of friends.
@@ -80,9 +83,7 @@ public class MongoUser {
     UpdateDB();
   }
 
-  public void changeProfilePic(File newProfilePic) throws IOException {
-    File oldPic = new File("profilepictures/" + userName + ".jpg");
-    oldPic.delete();
+  public void changeProfilePic(String newProfilePic) throws IOException {
     File targetFile = new File("profilepictures/" + userName + ".jpg");
     FileInputStream input = new FileInputStream(newProfilePic);
     FileOutputStream output = new FileOutputStream(targetFile);
@@ -122,5 +123,10 @@ public class MongoUser {
   public boolean checkCredentials(String passwordTry) {
     return this.password.equals(passwordTry);
 
+  }
+
+  public static void main(String[] args) throws IOException, ParseException {
+    MongoUser bill = new MongoUser("musky");
+    bill.changePassword("asdnasd3");
   }
 }
