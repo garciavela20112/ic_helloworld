@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        textarea {
+            resize: vertical;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .profile {
+            height: 100%;
+            width: 25%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .main {
+            margin-left: 25%;
+            /* Same as the width of the sidenav */
+            padding: 0px 10px;
+        }
+
+        .textbox {
+            position: fixed;
+            bottom: 0pt;
+            margin-left: 25%;
+            padding-bottom: 3%;
+            padding-top: 3%;
+
+        }
+
+        /* @media screen and (max-height: 450px) {
+            .profile {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        } */
+    </style>
+</head>
+
+<body>
+
+    <div class="profile">
+        <picture> <img src="blank-profile-picture-973460_640.png" alt="" style="max-width: 100px;"/></picture>
+        <p>Norberto Mateos</p>
+
+    </div>
+
+    <div class="main">
+        <p>Hey, how you been? You going to the Hackathon?</p>
+        <p>Good, good, you? Is that even a question??? Ofcourse I am!</p>
+        <p>Awesoome. I'll see you there :slight_smile:</p>
+    </div>
+
+    <div class="textbox">
+        <form>
+            <label for="textMessage"></label>Message:</label> <br>
+            <textarea id="text" cols="100" wrap="soft" autofocus></textarea><br>
+            </form>
+
+            <input type="submit" value="Submit" id="submit">
+
+        </div>
+
+</body>
+<script>
+</script>
+
+</html>
