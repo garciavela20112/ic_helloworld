@@ -25,4 +25,9 @@ public class Message {
           .append("content", content); 
       messageCollection.insertOne(doc);
   }
+
+  public static void main(String[] args) {
+      Message msg = new Message("oscargarcia", "norbertomat", "Hey, how you been? You going to the Hackathon?");
+      msg.addMessage(MongoConnection.DBConnect().getCollection("messages"));
+  }
 }
