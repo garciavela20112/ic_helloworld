@@ -1,21 +1,28 @@
 package Messages;
 
-import Users.User;
-
-import java.time.Clock;
+import java.util.Date;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 
 public class Message {
 
-  private final User sender;
-  private final User recipient;
-  private final Clock time;
+  private final String senderUsername;
+  private final String recipientUsername;
+  private final Date time;
   private final String content;
 
-  public Message(User sender, User recipient, Clock time, String content) {
-    this.sender = sender;
-    this.recipient = recipient;
-    this.time = time;
+  public Message(String sender, String recipient, String content) {
+    this.senderUsername = sender;
+    this.recipientUsername = recipient;
+    this.time = new Date();
     this.content = content;
-    //MESSAGE POST
+  }
+
+  public void addMessage(MongoCollection<Document> messageCollection) {
+      Document doc = new Document("sender", senderUsername)
+          .append("recipient", recipientUsername)
+          .append("time", time.toString())
+          .append("content", content); 
+      messageCollection.insertOne(doc);
   }
 }
