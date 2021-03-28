@@ -27,12 +27,6 @@ public class LoginServlet extends HttpServlet {
 
       String username = request.getParameter("username");
       String password = request.getParameter("password");
-      Boolean newAccount = Boolean.valueOf(request.getParameter("newAccount"));
-
-      /*if (newAccount) {
-        //Set Register Flag
-        collection.find(Filters.eq("username", ))
-      }*/
 
       FindIterable<Document> itr = collection.find(Filters.and(
           Filters.eq("username",username),

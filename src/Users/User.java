@@ -128,15 +128,8 @@ public class User {
         interestString.toString();
   }
 
-  public String getFriends() {
-    StringBuilder friendString = new StringBuilder();
-    List<String> friendsList = friends.stream().map(friend -> friend.userName)
-        .collect(Collectors.toList());
-    for (String friend : friendsList) {
-      friendString.append(friend).append(",");
-    }
-    friendString.deleteCharAt(friendString.length() - 1);
-    return friendString.toString();
+  public List<User> getFriends() {
+    return friends;
   }
 
   public static void main(String[] args) throws IOException, ParseException {
